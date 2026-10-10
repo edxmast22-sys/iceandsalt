@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avaliação de Saúde Vascular Masculina</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Male Vascular Health Assessment</title>
   <style>
     :root {
-      --bg-color: #0d1117;
+      --bg-color: #0b0e14;
       --card-bg: #161b22;
-      --border-color: #30363d;
+      --border-color: #21262d;
       --accent-color: #e53e3e;
       --accent-hover: #c53030;
       --text-color: #f0f6fc;
       --text-muted: #8b949e;
-      --green-highlight: #2ea043;
+      --option-bg: #1c2128;
+      --option-active: #2d333b;
     }
 
     * {
@@ -21,6 +22,7 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -29,28 +31,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
-      padding: 20px;
+      padding: 15px 12px;
     }
 
     .container {
       width: 100%;
-      max-width: 680px;
+      max-width: 500px; /* Layout focado em dispositivos móveis */
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 30px 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 16px;
+      padding: 24px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      margin: auto 0;
     }
 
-    /* BARRA DE PROGRESSO DO QUIZ */
+    /* QUIZ PROGRESS BAR */
     .progress-bar-container {
       width: 100%;
       background-color: var(--border-color);
       border-radius: 10px;
-      height: 10px;
-      margin-bottom: 25px;
+      height: 8px;
+      margin-bottom: 20px;
       overflow: hidden;
     }
 
@@ -64,61 +67,66 @@
     .header-tag {
       text-align: center;
       color: var(--accent-color);
-      font-size: 13px;
-      font-weight: bold;
+      font-size: 11px;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .question-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 25px;
-      line-height: 1.4;
+      margin-bottom: 20px;
+      line-height: 1.35;
+      color: #ffffff;
     }
 
     .options-grid {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
+    /* BOTÕES DE RESPOSTA OTIMIZADOS PARA O POLEGAR (TOUCH TARGET) */
     .btn-option {
-      background: #21262d;
+      background: var(--option-bg);
       border: 1px solid var(--border-color);
       color: var(--text-color);
-      padding: 16px 20px;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.3;
       text-align: left;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease;
       display: flex;
       align-items: center;
+      width: 100%;
     }
 
-    .btn-option:hover {
+    .btn-option:active {
       background: var(--accent-color);
       border-color: var(--accent-hover);
+      color: #ffffff;
     }
 
-    /* CARREGAMENTO / PROCESSAMENTO */
+    /* LOADING / PROCESSING SCREEN */
     #loading-screen {
       display: none;
       text-align: center;
-      padding: 40px 10px;
+      padding: 30px 10px;
     }
 
     .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid var(--border-color);
-      border-top: 5px solid var(--accent-color);
+      width: 44px;
+      height: 44px;
+      border: 4px solid var(--border-color);
+      border-top: 4px solid var(--accent-color);
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px auto;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 16px auto;
     }
 
     @keyframes spin {
@@ -127,16 +135,16 @@
     }
 
     .loading-status {
-      font-size: 16px;
+      font-size: 14px;
       color: var(--text-muted);
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    /* PÁGINA DA VSL */
+    /* VSL PAGE SCREEN (MOBILE FIRST) */
     #vsl-screen {
       display: none;
       width: 100%;
-      max-width: 800px;
+      max-width: 600px;
       text-align: center;
     }
 
@@ -144,38 +152,41 @@
       background-color: rgba(229, 62, 62, 0.15);
       border: 1px solid var(--accent-color);
       color: #ff6b6b;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 13px;
-      font-weight: bold;
+      font-size: 11px;
+      font-weight: 800;
       display: inline-block;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
     }
 
     .vsl-headline {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
       line-height: 1.3;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      color: #ffffff;
     }
 
     .vsl-subheadline {
-      font-size: 15px;
+      font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      padding: 0 10px;
     }
 
-    /* VSL HORIZONTAL (16:9 PROPORTION) */
+    /* HORIZONTAL VSL PLAYER (16:9 ASPECT RATIO NO MOBILE) */
     .video-wrapper {
       position: relative;
       padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
       height: 0;
       background-color: #000;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-      margin-bottom: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+      margin-bottom: 25px;
     }
 
     .video-wrapper iframe, .video-wrapper embed-container {
@@ -186,144 +197,120 @@
       height: 100%;
     }
 
-    /* BLOCO DE OFERTA / BOTÃO DE COMPRA */
-    .cta-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
+    /* TESTIMONIALS SECTION PLACEHOLDER FOR MOBILE */
+    .testimonials-section {
+      margin-top: 30px;
+      text-align: left;
     }
 
-    .btn-cta {
-      background-color: var(--green-highlight);
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 800;
-      padding: 20px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 5px 20px rgba(46, 160, 67, 0.4);
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-cta:hover {
-      background-color: #268937;
-      transform: scale(1.02);
-    }
-
-    .guarantee-text {
-      font-size: 13px;
-      color: var(--text-muted);
+    .testimonials-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--text-color);
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== CONTAINER DO QUIZ ==================== -->
+  <!-- ==================== QUIZ CONTAINER ==================== -->
   <div class="container" id="quiz-container">
     <div class="progress-bar-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
-    <div class="header-tag">Avaliação Médica Vascular</div>
+    <div class="header-tag">Male Vascular Medical Assessment</div>
     
     <div id="quiz-step">
-      <h2 class="question-title" id="question-text">Carregando pergunta...</h2>
+      <h2 class="question-title" id="question-text">Loading question...</h2>
       <div class="options-grid" id="options-container"></div>
     </div>
   </div>
 
-  <!-- ==================== TELA DE CARREGAMENTO ==================== -->
+  <!-- ==================== LOADING SCREEN ==================== -->
   <div class="container" id="loading-screen">
     <div class="spinner"></div>
-    <h2 style="font-size: 20px; margin-bottom: 10px;">Analisando suas respostas...</h2>
-    <p class="loading-status" id="loading-status-text">Verificando índice de saúde vascular...</p>
+    <h2 style="font-size: 18px; margin-bottom: 8px;">Analyzing your responses...</h2>
+    <p class="loading-status" id="loading-status-text">Checking vascular health index...</p>
   </div>
 
-  <!-- ==================== PÁGINA DA VSL (HORIZONTAL) ==================== -->
+  <!-- ==================== VSL PAGE (MOBILE HORIZONTAL VSL) ==================== -->
   <div id="vsl-screen">
-    <div class="vsl-badge">⚠️ SEU DIAGNÓSTICO: ALTO RISCO DE ASFIXIA MICROVASCULAR</div>
-    <h1 class="vsl-headline">Descubra Como Reativar Suas Artérias Cavernosas com a Rotina de 60 Segundos do Sal e Gelo</h1>
-    <p class="vsl-subheadline">Assista ao relatório oficial do Dr. Theko Rampai antes que este vídeo seja retirado do ar.</p>
+    <div class="vsl-badge">⚠️ DIAGNOSIS: HIGH RISK OF MICROVASCULAR SUFFOCATION</div>
+    <h1 class="vsl-headline">Discover How to Reactivate Your Cavernous Arteries with the 60-Second Ice and Salt Routine</h1>
+    <p class="vsl-subheadline">Watch the official medical report by Dr. Theko Rampai before this video is taken down.</p>
 
-    <!-- PLAYER DE VÍDEO HORIZONTAL 16:9 -->
+    <!-- HORIZONTAL VIDEO PLAYER CONTAINER (Paste your Vturb embed code here) -->
     <div class="video-wrapper">
-      <!-- Substitua a URL abaixo pelo embed da sua VSL (Vturb, YouTube, Vimeo, Bunny, etc) -->
+      <!-- PASTE YOUR VTURB EMBED CODE HERE -->
       <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" 
-              title="Apresentação VSL Dr. Theko Rampai" 
+              title="Dr. Theko Rampai VSL Presentation" 
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
       </iframe>
     </div>
 
-    <!-- BOTÃO DA OFERTA (Pode ser configurado para aparecer com delay se preferir) -->
-    <div class="cta-container" id="cta-block">
-      <a href="https://SEU-LINK-DE-CHECKOUT.com" class="btn-cta">
-        QUERO O MÉTODO DO GELO E SAL AGORA
-      </a>
-      <p class="guarantee-text">🔒 Compra 100% Segura • Acesso Imediato e Discreto • Garantia de 30 Dias</p>
+    <!-- TESTIMONIALS SECTION (Place your testimonials / Vturb delay elements below) -->
+    <div class="testimonials-section">
+      <h3 class="testimonials-title">Real Results from Men Across South Africa</h3>
+      <!-- Insert your mobile testimonial cards here -->
     </div>
   </div>
 
   <script>
-    // PERGUNTAS DO QUIZ
+    // QUIZ QUESTIONS IN ENGLISH (SOUTH AFRICA TARGET)
     const questions = [
       {
-        question: "1. Qual é a sua faixa etária atual?",
+        question: "1. What is your current age group?",
         options: [
-          "Entre 35 e 44 anos",
-          "Entre 45 e 54 anos",
-          "Entre 55 e 64 anos",
-          "65 anos ou mais"
+          "Between 35 and 44 years old",
+          "Between 45 and 54 years old",
+          "Between 55 and 64 years old",
+          "65 years old or older"
         ]
       },
       {
-        question: "2. Nas últimas vezes em que esteve com sua parceira, como você avalia a firmeza da sua ereção?",
+        question: "2. The last few times you were with your partner, how would you rate the firmness of your erection?",
         options: [
-          "Completamente rígida e confiável durante todo o ato",
-          "Começa ereta, mas vai perdendo força no meio da relação",
-          "Demora muito mais tempo do que costumava demorar",
-          "Raramente responde, e evito situações íntimas por pavor"
+          "Completely rock-hard and reliable throughout",
+          "Starts firm, but loses strength halfway through",
+          "Takes much longer to respond than it used to",
+          "Rarely responds, and I actively avoid intimacy"
         ]
       },
       {
-        question: "3. Com que frequência você sente ansiedade ou preocupação sobre falhar na cama?",
+        question: "3. How often do you feel anxiety or worry about failing in bed?",
         options: [
-          "Quase nunca",
-          "Ocasionalmente (1 a 2 vezes por mês)",
-          "Com frequência (sinto um frio na barriga antes da intimidade)",
-          "Sempre (mudo de assunto, finjo cansaço ou evito ir para a cama)"
+          "Almost never",
+          "Occasionally (1 to 2 times a month)",
+          "Frequently (I feel dread before intimacy starts)",
+          "Always (I change the subject, pretend to be tired, or avoid bed)"
         ]
       },
       {
-        question: "4. Você já usou pílulas azuis, estimulantes sintéticos ou suplementos para tentar resolver?",
+        question: "4. Have you ever tried blue pills, synthetic stimulants, or testosterone boosters?",
         options: [
-          "Nunca tentei pílulas ou suplementos",
-          "Já tentei, mas me causou dores de cabeça ou coração acelerado",
-          "Já tentei, mas o efeito parou de funcionar com o tempo",
-          "Uso ocasionalmente, mas odeio depender de comprimidos"
+          "Never tried pills or supplements",
+          "Tried them, but got severe headaches or a racing heart",
+          "Tried them, but they stopped working over time",
+          "Use them occasionally, but hate depending on pills"
         ]
       },
       {
-        question: "5. Você sabia que 89% da perda de ereção após os 40 anos NÃO é testosterona, mas sim Asfixia Microvascular?",
+        question: "5. Did you know that 89% of erection loss after age 40 is NOT low testosterone, but Microvascular Suffocation?",
         options: [
-          "Sim, já ouvi falar sobre resposta vascular",
-          "Não, eu achava que era apenas um problema de idade ou hormônios",
-          "Nunca ouvi falar, mas gostaria de entender como desentupir esses vasos"
+          "Yes, I have heard about vascular response",
+          "No, I thought it was just age or hormones",
+          "Never heard of it, but I want to know how to unclog those vessels"
         ]
       },
       {
-        question: "6. Se o Dr. Theko Rampai mostrasse um método caseiro de 60 segundos com gelo e sal, você assistiria a um vídeo de 10 minutos agora?",
+        question: "6. If Dr. Theko Rampai showed a 60-second home method using ice and salt, would you watch a 10-minute presentation right now?",
         options: [
-          "Sim! Quero recuperar minha virilidade o mais rápido possível",
-          "Sim, desde que seja 100% discreto, natural e sem efeitos colaterais",
-          "Não tenho interesse em métodos naturais"
+          "Yes! I want to restore my virility as fast as possible",
+          "Yes, as long as it is 100% discrete, natural, and side-effect free",
+          "I am not interested in natural methods"
         ]
       }
     ];
@@ -343,7 +330,7 @@
       questionText.innerText = q.question;
       optionsContainer.innerHTML = "";
 
-      // Atualiza a barra de progresso
+      // Update progress bar
       const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
       progressBar.style.width = progressPercent + "%";
 
@@ -370,10 +357,10 @@
       loadingScreen.style.display = "block";
 
       const statuses = [
-        "Analisando seu perfil de resposta vascular...",
-        "Identificando nível de rigidez arterial cavernosa...",
-        "Calculando dosagem do protocolo de choque térmico...",
-        "Gerando o relatório em vídeo do Dr. Theko Rampai..."
+        "Analyzing your vascular response profile...",
+        "Identifying cavernous arterial stiffness level...",
+        "Calculating thermal shock protocol dosage...",
+        "Generating Dr. Theko Rampai's video report..."
       ];
 
       let i = 0;
@@ -391,9 +378,10 @@
     function showVSLPage() {
       loadingScreen.style.display = "none";
       vslScreen.style.display = "block";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Inicializa o quiz na abertura da página
+    // Initialize quiz
     renderQuestion();
   </script>
 </body>
