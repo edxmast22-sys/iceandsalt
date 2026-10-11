@@ -47,10 +47,9 @@
       border-radius: 16px;
       padding: 24px 16px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
-    /* QUIZ PROGRESS BAR */
     .progress-bar-container {
       width: 100%;
       background-color: var(--border-color);
@@ -114,7 +113,6 @@
       color: #ffffff;
     }
 
-    /* LOADING SCREEN */
     #loading-screen {
       display: none;
       text-align: center;
@@ -142,7 +140,6 @@
       margin-top: 8px;
     }
 
-    /* VSL PAGE SCREEN */
     #vsl-screen {
       display: none;
       width: 100%;
@@ -151,7 +148,6 @@
       margin-top: 10px;
     }
 
-    /* LIVE VIEWER COUNTER */
     .live-viewers-box {
       display: inline-flex;
       align-items: center;
@@ -176,24 +172,12 @@
     }
 
     @keyframes pulse {
-      0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7);
-      }
-      70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 6px rgba(229, 62, 62, 0);
-      }
-      100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
-      }
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(229, 62, 62, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 62, 62, 0); }
     }
 
-    .viewer-count {
-      font-weight: 800;
-      color: #ffffff;
-    }
+    .viewer-count { font-weight: 800; color: #ffffff; }
 
     .vsl-badge {
       background-color: rgba(229, 62, 62, 0.15);
@@ -223,7 +207,6 @@
       padding: 0 10px;
     }
 
-    /* HORIZONTAL VSL PLAYER (16:9 ASPECT RATIO) */
     .video-wrapper {
       position: relative;
       padding-bottom: 56.25%;
@@ -244,7 +227,6 @@
       height: 100%;
     }
 
-    /* WHATSAPP TESTIMONIALS */
     .wa-testimonials-section {
       margin-top: 35px;
       width: 100%;
@@ -295,18 +277,8 @@
       flex-shrink: 0;
     }
 
-    .wa-user-info h4 {
-      font-size: 14px;
-      color: #e9edef;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .wa-user-info p {
-      font-size: 11px;
-      color: #8696a0;
-      margin: 1px 0 0 0;
-    }
+    .wa-user-info h4 { font-size: 14px; color: #e9edef; font-weight: 600; margin: 0; }
+    .wa-user-info p { font-size: 11px; color: #8696a0; margin: 1px 0 0 0; }
 
     .wa-bubble {
       background-color: #202c33;
@@ -343,10 +315,7 @@
       gap: 3px;
     }
 
-    .wa-ticks {
-      color: #53bdeb;
-      font-weight: bold;
-    }
+    .wa-ticks { color: #53bdeb; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -362,3 +331,133 @@
       <h2 class="question-title" id="question-text">Loading question...</h2>
       <div class="options-grid" id="options-container"></div>
     </div>
+  </div>
+
+  <!-- LOADING SCREEN -->
+  <div class="container" id="loading-screen">
+    <div class="spinner"></div>
+    <h2 style="font-size: 18px; margin-bottom: 8px;">Analyzing your responses...</h2>
+    <p class="loading-status" id="loading-status-text">Checking vascular health index...</p>
+  </div>
+
+  <!-- VSL PAGE -->
+  <div id="vsl-screen">
+    <div class="live-viewers-box">
+      <div class="pulse-dot"></div>
+      <span><span class="viewer-count" id="live-counter">2,418</span> men in South Africa watching now</span>
+    </div>
+
+    <div class="vsl-badge">⚠️ DIAGNOSIS: HIGH RISK OF MICROVASCULAR SUFFOCATION</div>
+    <h1 class="vsl-headline">Discover How to Reactivate Your Cavernous Arteries with the 60-Second Ice and Salt Routine</h1>
+    <p class="vsl-subheadline">Watch the official medical report by Dr. Theko Rampai before this video is taken down.</p>
+
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" 
+              title="Dr. Theko Rampai VSL Presentation" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- WHATSAPP TESTIMONIALS -->
+    <div class="wa-testimonials-section">
+      <h3 class="wa-section-title">Recent WhatsApp Messages from Verified Users</h3>
+
+      <div class="wa-chat-container">
+
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar" style="background-color: #3b5998;">DN</div>
+            <div class="wa-user-info">
+              <h4>David N. (Gauteng)</h4>
+              <p>online</p>
+            </div>
+          </div>
+          <div class="wa-bubble">
+            Doc, I'm genuinely speechless. I tried the ice and salt routine last night around 10 PM. Woke up at 6 AM today with an erection so hard it woke me up! First time in 4 years I didn't need pills. 🙏
+            <div class="wa-time">06:14 AM</div>
+          </div>
+          <div class="wa-bubble-sent">
+            That is incredible news David! Keep following the daily schedule consistently.
+            <div class="wa-time">06:22 AM <span class="wa-ticks">✓✓</span></div>
+          </div>
+        </div>
+
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar" style="background-color: #2e7d32;">JS</div>
+            <div class="wa-user-info">
+              <h4>Johan S. (Cape Town)</h4>
+              <p>last seen today at 08:45</p>
+            </div>
+          </div>
+          <div class="wa-bubble">
+            Hey Dr. Rampai. Just wanted to thank you personally. My wife and I had the best weekend we've had in 10 years. Lasted over 35 minutes last night without feeling tired or losing firmness once!
+            <div class="wa-time">08:42 AM</div>
+          </div>
+          <div class="wa-bubble-sent">
+            So glad to hear that Johan! No more anxiety in the bedroom.
+            <div class="wa-time">08:45 AM <span class="wa-ticks">✓✓</span></div>
+          </div>
+        </div>
+
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar" style="background-color: #c62828;">SM</div>
+            <div class="wa-user-info">
+              <h4>Sipho M. (Durban)</h4>
+              <p>online</p>
+            </div>
+          </div>
+          <div class="wa-bubble">
+            I was really skeptical at 63 years old thinking my body was just done. Day 4 on the protocol and the morning stiffness is completely back. No headaches, no racing heart like with blue pills. Worth every cent.
+            <div class="wa-time">11:05 AM</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "1. What is your current age group?",
+        options: [
+          "Between 35 and 44 years old",
+          "Between 45 and 54 years old",
+          "Between 55 and 64 years old",
+          "65 years old or older"
+        ]
+      },
+      {
+        question: "2. The last few times you were with your partner, how would you rate the firmness of your erection?",
+        options: [
+          "Completely rock-hard and reliable throughout",
+          "Starts firm, but loses strength halfway through",
+          "Takes much longer to respond than it used to",
+          "Rarely responds, and I actively avoid intimacy"
+        ]
+      },
+      {
+        question: "3. How often do you feel anxiety or worry about failing in bed?",
+        options: [
+          "Almost never",
+          "Occasionally (1 to 2 times a month)",
+          "Frequently (I feel dread before intimacy starts)",
+          "Always (I change the subject, pretend to be tired, or avoid bed)"
+        ]
+      },
+      {
+        question: "4. Have you ever tried blue pills, synthetic stimulants, or testosterone boosters?",
+        options: [
+          "Never tried pills or supplements",
+          "Tried them, but got severe headaches or a racing heart",
+          "Tried them, but they stopped working over time",
+          "Use them occasionally, but hate depending on pills"
+        ]
+      },
+      {
+        question: "5. Did you know that 89% of erection loss after age 40 is NOT low testosterone, but Microvascular Suffocation?",
+        options
