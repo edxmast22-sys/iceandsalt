@@ -38,7 +38,7 @@
 
     .container {
       width: 100%;
-      max-width: 500px; /* Layout focado em dispositivos móveis */
+      max-width: 500px; /* Mobile-First Layout */
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 16px;
@@ -89,7 +89,6 @@
       gap: 10px;
     }
 
-    /* BOTÕES DE RESPOSTA OTIMIZADOS PARA O POLEGAR (TOUCH TARGET) */
     .btn-option {
       background: var(--option-bg);
       border: 1px solid var(--border-color);
@@ -112,7 +111,7 @@
       color: #ffffff;
     }
 
-    /* LOADING / PROCESSING SCREEN */
+    /* LOADING SCREEN */
     #loading-screen {
       display: none;
       text-align: center;
@@ -140,12 +139,56 @@
       margin-top: 8px;
     }
 
-    /* VSL PAGE SCREEN (MOBILE FIRST) */
+    /* VSL PAGE SCREEN */
     #vsl-screen {
       display: none;
       width: 100%;
-      max-width: 600px;
+      max-width: 550px;
       text-align: center;
+    }
+
+    /* LIVE VIEWER COUNTER */
+    .live-viewers-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(22, 27, 34, 0.9);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #f0f6fc;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(229, 62, 62, 0.7);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(229, 62, 62, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+      }
+    }
+
+    .viewer-count {
+      font-weight: 800;
+      color: #ffffff;
     }
 
     .vsl-badge {
@@ -167,222 +210,3 @@
       line-height: 1.3;
       margin-bottom: 10px;
       color: #ffffff;
-    }
-
-    .vsl-subheadline {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      padding: 0 10px;
-    }
-
-    /* HORIZONTAL VSL PLAYER (16:9 ASPECT RATIO NO MOBILE) */
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      background-color: #000;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-      margin-bottom: 25px;
-    }
-
-    .video-wrapper iframe, .video-wrapper embed-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* TESTIMONIALS SECTION PLACEHOLDER FOR MOBILE */
-    .testimonials-section {
-      margin-top: 30px;
-      text-align: left;
-    }
-
-    .testimonials-title {
-      font-size: 18px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 15px;
-      color: var(--text-color);
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ==================== QUIZ CONTAINER ==================== -->
-  <div class="container" id="quiz-container">
-    <div class="progress-bar-container">
-      <div class="progress-bar" id="progress-bar"></div>
-    </div>
-    <div class="header-tag">Male Vascular Medical Assessment</div>
-    
-    <div id="quiz-step">
-      <h2 class="question-title" id="question-text">Loading question...</h2>
-      <div class="options-grid" id="options-container"></div>
-    </div>
-  </div>
-
-  <!-- ==================== LOADING SCREEN ==================== -->
-  <div class="container" id="loading-screen">
-    <div class="spinner"></div>
-    <h2 style="font-size: 18px; margin-bottom: 8px;">Analyzing your responses...</h2>
-    <p class="loading-status" id="loading-status-text">Checking vascular health index...</p>
-  </div>
-
-  <!-- ==================== VSL PAGE (MOBILE HORIZONTAL VSL) ==================== -->
-  <div id="vsl-screen">
-    <div class="vsl-badge">⚠️ DIAGNOSIS: HIGH RISK OF MICROVASCULAR SUFFOCATION</div>
-    <h1 class="vsl-headline">Discover How to Reactivate Your Cavernous Arteries with the 60-Second Ice and Salt Routine</h1>
-    <p class="vsl-subheadline">Watch the official medical report by Dr. Theko Rampai before this video is taken down.</p>
-
-    <!-- HORIZONTAL VIDEO PLAYER CONTAINER (Paste your Vturb embed code here) -->
-    <div class="video-wrapper">
-      <!-- PASTE YOUR VTURB EMBED CODE HERE -->
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" 
-              title="Dr. Theko Rampai VSL Presentation" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- TESTIMONIALS SECTION (Place your testimonials / Vturb delay elements below) -->
-    <div class="testimonials-section">
-      <h3 class="testimonials-title">Real Results from Men Across South Africa</h3>
-      <!-- Insert your mobile testimonial cards here -->
-    </div>
-  </div>
-
-  <script>
-    // QUIZ QUESTIONS IN ENGLISH (SOUTH AFRICA TARGET)
-    const questions = [
-      {
-        question: "1. What is your current age group?",
-        options: [
-          "Between 35 and 44 years old",
-          "Between 45 and 54 years old",
-          "Between 55 and 64 years old",
-          "65 years old or older"
-        ]
-      },
-      {
-        question: "2. The last few times you were with your partner, how would you rate the firmness of your erection?",
-        options: [
-          "Completely rock-hard and reliable throughout",
-          "Starts firm, but loses strength halfway through",
-          "Takes much longer to respond than it used to",
-          "Rarely responds, and I actively avoid intimacy"
-        ]
-      },
-      {
-        question: "3. How often do you feel anxiety or worry about failing in bed?",
-        options: [
-          "Almost never",
-          "Occasionally (1 to 2 times a month)",
-          "Frequently (I feel dread before intimacy starts)",
-          "Always (I change the subject, pretend to be tired, or avoid bed)"
-        ]
-      },
-      {
-        question: "4. Have you ever tried blue pills, synthetic stimulants, or testosterone boosters?",
-        options: [
-          "Never tried pills or supplements",
-          "Tried them, but got severe headaches or a racing heart",
-          "Tried them, but they stopped working over time",
-          "Use them occasionally, but hate depending on pills"
-        ]
-      },
-      {
-        question: "5. Did you know that 89% of erection loss after age 40 is NOT low testosterone, but Microvascular Suffocation?",
-        options: [
-          "Yes, I have heard about vascular response",
-          "No, I thought it was just age or hormones",
-          "Never heard of it, but I want to know how to unclog those vessels"
-        ]
-      },
-      {
-        question: "6. If Dr. Theko Rampai showed a 60-second home method using ice and salt, would you watch a 10-minute presentation right now?",
-        options: [
-          "Yes! I want to restore my virility as fast as possible",
-          "Yes, as long as it is 100% discrete, natural, and side-effect free",
-          "I am not interested in natural methods"
-        ]
-      }
-    ];
-
-    let currentQuestion = 0;
-
-    const quizContainer = document.getElementById("quiz-container");
-    const questionText = document.getElementById("question-text");
-    const optionsContainer = document.getElementById("options-container");
-    const progressBar = document.getElementById("progress-bar");
-    const loadingScreen = document.getElementById("loading-screen");
-    const loadingStatusText = document.getElementById("loading-status-text");
-    const vslScreen = document.getElementById("vsl-screen");
-
-    function renderQuestion() {
-      const q = questions[currentQuestion];
-      questionText.innerText = q.question;
-      optionsContainer.innerHTML = "";
-
-      // Update progress bar
-      const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
-      progressBar.style.width = progressPercent + "%";
-
-      q.options.forEach((opt) => {
-        const btn = document.createElement("button");
-        btn.className = "btn-option";
-        btn.innerText = opt;
-        btn.onclick = handleAnswer;
-        optionsContainer.appendChild(btn);
-      });
-    }
-
-    function handleAnswer() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        renderQuestion();
-      } else {
-        startLoadingSequence();
-      }
-    }
-
-    function startLoadingSequence() {
-      quizContainer.style.display = "none";
-      loadingScreen.style.display = "block";
-
-      const statuses = [
-        "Analyzing your vascular response profile...",
-        "Identifying cavernous arterial stiffness level...",
-        "Calculating thermal shock protocol dosage...",
-        "Generating Dr. Theko Rampai's video report..."
-      ];
-
-      let i = 0;
-      const interval = setInterval(() => {
-        i++;
-        if (i < statuses.length) {
-          loadingStatusText.innerText = statuses[i];
-        } else {
-          clearInterval(interval);
-          showVSLPage();
-        }
-      }, 1000);
-    }
-
-    function showVSLPage() {
-      loadingScreen.style.display = "none";
-      vslScreen.style.display = "block";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Initialize quiz
-    renderQuestion();
-  </script>
-</body>
-</html>
